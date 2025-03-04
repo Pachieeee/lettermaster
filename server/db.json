@@ -1,0 +1,74 @@
+{
+  "portfolios": [
+    {
+      "id": "1",
+      "userId": "1",
+      "name": "BCP",
+      "discountDate": "2023-06-30T00:00:00Z",
+      "description": "Facturas relacionadas con BCP"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "name": "Bodega PQ S.A.C",
+      "discountDate": "2023-07-31T00:00:00Z",
+      "description": "Proveedores de vinos"
+    },
+    {
+      "id": "c1TuPH0",
+      "userId": 1,
+      "name": "Clientes",
+      "discountDate": "2025-03-02T23:05:09.982Z",
+      "description": "Empresas clientes"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "1",
+      "ruc": "123456789",
+      "business": "Bodega S.A.C.",
+      "amount": 1000,
+      "coin": "USD",
+      "emissionDate": "12/31/2022",
+      "expirationDate": "12/30/2023",
+      "discountDate": "6/29/2023",
+      "discountRate": 5,
+      "rateType": "Efectiva",
+      "rate": 25.2,
+      "taxRelief": 200,
+      "studyFee": 0,
+      "activationFee": 0,
+      "retention": 0,
+      "shipping": 0,
+      "finalAmount": 1195,
+      "portfolioId": "1"
+    },
+    {
+      "id": "3",
+      "ruc": "987654321",
+      "business": "awaaaaaaaaaaa",
+      "amount": 2000,
+      "coin": "EUR",
+      "emissionDate": "2023-02-01T00:00:00Z",
+      "expirationDate": "2023-11-30T00:00:00Z",
+      "discountDate": "2023-07-31T00:00:00Z",
+      "discountRate": 3,
+      "rateType": "variable",
+      "rate": 19.4,
+      "costs": 150,
+      "portfolioId": "2"
+    }
+  ],
+  "users": [
+    {
+      "username": "test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "username": "Pache",
+      "password": "12345",
+      "id": 2
+    }
+  ]
+}
