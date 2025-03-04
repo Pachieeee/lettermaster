@@ -22,8 +22,16 @@ export default {
 <template>
   <pv-card class="flex shadow-3" @click="handleClick">
     <template #title>{{ portfolio.name }}</template>
-    <template #subtitle>Creación: {{ formatDate }}</template>
-    <template #content>Descripción: {{ portfolio.description }}</template>
+    <template #subtitle>{{ portfolio.description }}</template>
+    <template #content>
+      <p>
+        Fecha de descuento: {{ formatDate }}
+      </p>
+      <p>
+        TEA Compensatoria: {{ portfolio.compensatoryRate }}%
+      </p>
+
+    </template>
   </pv-card>
 </template>
 

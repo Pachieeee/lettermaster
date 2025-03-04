@@ -5,37 +5,43 @@ export class Invoice {
         business= '',
         amount = 0,
         coin = '',
-        emissionDate = new Date(),
+        emissionDate = '',
         expirationDate = new Date(),
-        discountDate = new Date(),
         discountRate = 0,
         rateType = '',
-        rate = 0,
-        taxRelief = 0,
-        studyFee = 0,
-        activationFee = 0,
-        retention = 0,
+
+        comission = 0,
+        printing = 0,
         shipping = 0,
+        adminSpends = 0,
+        secure = 0,
+        retention = 0,
+
         finalAmount = 0,
+        tcea = 0,
+        total = 0,
         portfolioId = ''
     }) {
         this.id = id;
-        this.ruc = ruc; //RUC+
-        this.business = business; //Razon social+
-        this.amount = amount; //Valor nominal+
-        this.coin = coin; //Tipo de moneda+
-        this.emissionDate = emissionDate; //Fecha de inicio+
-        this.expirationDate = expirationDate; //Fecha de vencimiento+
-        this.discountDate = discountDate; //Fecha de descuento+
-        this.discountRate = discountRate; //Tasa de descuento+
-        this.rateType = rateType; //Tipo de tasa (efectiva o nominal)+
-        this.rate = rate; //Valor de la tasa+
-        this.taxRelief = taxRelief;
-        this.studyFee = studyFee;
-        this.activationFee = activationFee;
-        this.retention = retention;
-        this.shipping = shipping;
-        this.finalAmount = finalAmount;
+        this.ruc = ruc; // Proporcionado
+        this.business = business; // Proporcionado
+        this.amount = amount; // Proporcionado
+        this.coin = coin; // Proporcionado
+        this.emissionDate = emissionDate; // Proporcionado
+        this.expirationDate = expirationDate; // Proporcionado
+        this.rateType = rateType; // Proporcionado
+
+        this.comission = comission; // Proporcionado
+        this.printing = printing; // Proporcionado
+        this.shipping = shipping; // Proporcionado
+        this.adminSpends = adminSpends; // Proporcionado
+        this.secure = secure; // Proporcionado
+        this.retention = retention; // Proporcionado
+
+        this.discountRate = discountRate; // Calculado
+        this.finalAmount = finalAmount; // Calculado
+        this.tcea = tcea; // Calculado
+        this.total = total; // Calculado
         this.portfolioId = portfolioId;
     }
 }

@@ -1,21 +1,23 @@
 <script>
-import InvoiceList from "../components/invoice-list.component.vue";
-import InvoiceCreateDialog from "../components/invoice-create-dialog.component.vue";
-import InvoiceCreateAndEdit from "../components/invoice-create-and-edit.component.vue";
 import {InvoiceService} from "../services/invoice.service.js";
 import {Invoice} from "../model/invoice.entity.js";
 import DataManager from "../../shared/components/data-manager.component.vue";
+import InvoiceCreateAndEdit from "../components/invoice-create-and-edit.component.vue";
+import {PortfolioService} from "../services/portfolio.service.js";
+import {Portfolio} from "../model/portfolio.entity.js";
 
 export default {
   name: "portfolio-invoices",
-  components: {DataManager, InvoiceCreateDialog, InvoiceList, InvoiceCreateAndEdit },
+  components: {DataManager, InvoiceCreateAndEdit },
   data() {
     return {
       title: { singular: 'Factura', plural: 'Facturas' },
       invoices: [],
       invoice: new Invoice({}),
       selectedInvoices: [],
+      portfolio: null,
       invoiceService: null,
+      portfolioService: null,
       createDialogVisible: false,
       createAndEditDialogIsVisible: false,
       isEdit: false,
@@ -27,6 +29,11 @@ export default {
     const portfolioId = this.$route.params.id;
     this.invoiceService.getByPortfolioId(portfolioId).then(response => {
       this.invoices = response.data;
+    }).catch(e => console.error(e));
+
+    this.portfolioService = new PortfolioService();
+    this.portfolioService.getById(portfolioId).then(response => {
+      this.portfolio = new Portfolio(response.data);
     }).catch(e => console.error(e));
   },
   methods: {
@@ -113,9 +120,8 @@ export default {
     invoicesWithFormat() {
       return this.invoices.map(invoice => ({
         ...invoice,
-        emissionDate: new Date(invoice.emissionDate).toLocaleDateString(),
+        emissionDate: invoice.emissionDate ? new Date(invoice.emissionDate).toLocaleDateString() : "No presenta",
         expirationDate: new Date(invoice.expirationDate).toLocaleDateString(),
-        discountDate: new Date(invoice.discountDate).toLocaleDateString(),
         amountAndCoin: `${invoice.amount} ${invoice.coin}`
       }))
     }
@@ -147,16 +153,18 @@ export default {
       <pv-column field="ruc" header="RUC" style="min-width: 6rem"/>
       <pv-column field="business" header="Empresa" style="min-width: 6rem"/>
       <pv-column :sortable="true" field="amountAndCoin" header="Monto inicial" style="min-width: 7rem"/>
-      <pv-column field="rateType" header="Tipo de Tasa" style="min-width: 4rem"/>
-      <pv-column :sortable="true" field="rate" header="Tasa%" style="min-width: 4rem"/>
       <pv-column :sortable="true" field="emissionDate" header="Emisión" style="min-width: 7rem"/>
-      <pv-column :sortable="true" field="finalAmount" header="Monto final" style="min-width: 7rem"/>
+      <pv-column :sortable="true" field="expirationDate" header="Vencimiento" style="min-width: 7rem"/>
+      <pv-column :sortable="true" field="finalAmount" header="Valor a recibir" style="min-width: 7rem"/>
+      <pv-column :sortable="true" field="tcea" header="TCEA%" style="min-width: 7rem"/>
+      <pv-column :sortable="true" field="total" header="Valor total" style="min-width: 7rem"/>
     </template>
   </data-manager>
 
   <invoice-create-and-edit
     :edit="isEdit"
     :invoice="invoice"
+    :portfolio="portfolio"
     :visible="createAndEditDialogIsVisible"
     @cancel-requested="onCancelRequested"
     @save-requested="onSaveRequested">

@@ -8,7 +8,6 @@ export const useAccountStore = defineStore('user',{
     state: () => ({ signedIn: false, userId: 0, username: ''}),
     actions: {
         async signIn(signInRequest, router) {
-            console.log("SignInRequest:", signInRequest)
             userService.getByUsername(signInRequest.username)
                 .then(response => {
                     const user = response.data.length > 0 ? response.data[0] : null;
